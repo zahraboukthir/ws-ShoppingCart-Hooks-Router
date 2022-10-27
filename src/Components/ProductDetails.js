@@ -15,7 +15,7 @@ const ProductDetails = () => {
     
   }, [idprod])
   
-  const prod=useSelector(state=>state.prodDetails)
+  const prod=useSelector(state=>state.prodReducer.prodDetails)
   return (
     <main className="containerc">
       {/* Left Column / Headphones Image */}

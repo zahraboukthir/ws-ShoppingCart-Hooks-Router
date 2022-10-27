@@ -3,11 +3,11 @@ import { Prod } from "./Prod";
 
 function ListProd() {
   const list=useSelector(
-    (state)=>state.list
+    (state)=>state.prodReducer.list
   )
-  const filtredname=useSelector(state=>state.filtredname)
-  const rate=useSelector(state=>state.rate)
-  const category=useSelector(state=>state.category)
+  const filtredname=useSelector(state=>state.prodReducer.filtredname)
+  const rate=useSelector(state=>state.prodReducer.rate)
+  const category=useSelector(state=>state.prodReducer.category)
   return (
     <div
       style={{

@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updatecart } from "../JS/actions/panierActions";
 
 export function Panier() {
-  const{ panier,total}=useSelector(state=>state)
+  const total=useSelector(state=>state.panierReducer.total)
+  const panier=useSelector(state=>state.panierReducer.panier)
   const dispatch=useDispatch()
   return (
     <div className="pannier">

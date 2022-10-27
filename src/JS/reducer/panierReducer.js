@@ -5,17 +5,10 @@ import {
   INCREMENTQTE,
   UPDATECART,
 } from "../actionsTypes/panierConst";
-import { FILTERBYCATEGORY, FILTERBYNAME, FILTERBYRATE, PRODDEATAILS } from "../actionsTypes/prodConst";
-import { list } from "./Data";
 
 const initState = {
-  list: list,
   panier: [],
   total: 0,
-  prodDetails: {},
-  filtredname: "",
-  rate:0,
-  category:"ALL"
 };
 export const panierReducer = (state = initState, { type, payload }) => {
   switch (type) {
@@ -78,27 +71,7 @@ export const panierReducer = (state = initState, { type, payload }) => {
         panier: [],
         total: 0,
       };
-    case PRODDEATAILS:
-      return {
-        ...state,
-        prodDetails: state.list.find((el) => el.id == payload),
-      };
 
-    case FILTERBYNAME:
-      return {
-        ...state,
-        filtredname: payload,
-      };
-      case FILTERBYRATE:
-      return {
-        ...state,
-        rate: payload,
-      };
-      case FILTERBYCATEGORY:
-      return {
-        ...state,
-        category: payload,
-      };
     default:
       return state;
   }
