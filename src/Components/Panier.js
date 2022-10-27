@@ -1,25 +1,24 @@
 import "./panier.css";
 import { ProdCart } from "./ProductCard";
+import { useSelector, useDispatch } from 'react-redux';
+import { updatecart } from "../JS/actions/panierActions";
 
-export function Panier({
-  handeldel,
-  panier,
-  totalA,
-  handeladdtotal,
-  handelmoinstotal,
-  updateCart,
-}) {
+export function Panier() {
+  const{ panier,total}=useSelector(state=>state)
+  const dispatch=useDispatch()
   return (
     <div className="pannier">
       <div className="container">
         <div className="heading">
           <h1>
-            <span className="shopper">Shopping Cart</span> 
+            <span className="shopper">Shopping Cart</span>
           </h1>
           <div className="visibility-cart transition is-open">X</div>
         </div>
         <div className="cart transition is-open">
-          <div onClick={() => updateCart()} className="btn btn-update">Update cart</div>
+          <div className="btn btn-update" onClick={()=>
+          dispatch(updatecart())
+          }>Update cart</div>
           <div className="table">
             <div className="layout-inline row th">
               <div className="col col-pro">Product</div>
@@ -29,15 +28,10 @@ export function Panier({
               <div className="col">Total</div>
               <div className="col"></div>
             </div>
-            {panier.map((el) => (
-              <ProdCart
-                prod={el}
-                key={el.id}
-                inTot={handeladdtotal}
-                decTot={handelmoinstotal}
-                handeldel={handeldel}
-              />
-            ))}
+
+         {panier.map(
+          prod=>   <ProdCart prod={prod} key={prod.id} />
+         )}
 
             <div className="tf">
               <div className="row layout-inline">
@@ -54,7 +48,7 @@ export function Panier({
               </div>
               <div className="row layout-inline">
                 <div className="col">
-                  <p>Total : {totalA}</p>
+                  <p>Total : {total}</p>
                 </div>
                 <div className="col" />
               </div>
