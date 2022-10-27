@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Prod } from "./Prod";
 
 function ListProd() {
@@ -9,6 +10,7 @@ function ListProd() {
   const rate=useSelector(state=>state.prodReducer.rate)
   const category=useSelector(state=>state.prodReducer.category)
   return (
+    <div><Link to="/addproduct">Add New Product</Link>
     <div
       style={{
         display: "flex",
@@ -36,7 +38,7 @@ function ListProd() {
       (produit)=>  <Prod produit={produit} key={produit.id}/>
     )
   }
-    </div>
+    </div></div>
   );
 }
 export default ListProd;
