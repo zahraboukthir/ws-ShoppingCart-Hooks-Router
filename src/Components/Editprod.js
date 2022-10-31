@@ -1,25 +1,42 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addprod } from "./../JS/actions/prodActions";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { editprod, proddetails } from "./../JS/actions/prodActions";
 
-export function AddProduct() {
+function Editprod() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const dispatch = useDispatch();
+  const [loading, setloading] = useState(false)
+  const proddet = useSelector((state) => state.prodReducer.prodDetails);
+  useEffect(() => {
+    dispatch(proddetails(id));
+    setloading(true)
+    if (loading) {
+        return setProd(proddet)
+    }
+  }, [id,loading,proddet,dispatch]);
+ 
   const [prod, setProd] = useState({
     name: "",
     rate: 0,
     price: 0,
     category: "",
-    img: "",
-    description: ``,
+    img:"",
+    description: "",
   });
+
   const handelChange = (e) => {
     setProd({ ...prod, [e.target.name]: e.target.value });
   };
   const handelSubmit = (e) => {
     e.preventDefault();
-    dispatch(addprod({ id: Math.random(), ...prod, price:Number(prod.price) }));
+    const editedprod={id,...prod, price:Number(prod.price)}
+ dispatch(
+ 
+    editprod(editedprod)
+ )
+console.log(  editedprod)
     setProd({
       name: "",
       rate: 0,
@@ -46,20 +63,35 @@ export function AddProduct() {
       <div>ADD PRODUCT</div>
       <form onSubmit={handelSubmit}>
         <label htmlFor="">Name</label>
-        <input type="text" name="name" id="" onChange={handelChange} required/>
+        <input value={prod.name} type="text" name="name" id="" onChange={handelChange} required />
         <br />
         <label htmlFor="">Product Photo</label>
-        <input type="url" name="img" id="" onChange={handelChange} required/>
+        <input value={prod.img}
+         type="url" name="img" id="" onChange={handelChange} required />
 
         <br />
         <label htmlFor="">Rate</label>
-        <input type="Number" name="rate" id="" onChange={handelChange} required />
+        <input value={prod.rate}
+          type="Number"
+          name="rate"
+          id=""
+          onChange={handelChange}
+          required
+        />
         <br />
         <label htmlFor="">Price</label>
-        <input type="Number" name="price" id="" onChange={handelChange} required/>
+        <input value={prod.price}
+          type="Number"
+          name="price"
+          id=""
+          onChange={handelChange}
+          required
+        />
         <br />
         <label htmlFor="">Description</label>
-        <textarea required
+        <textarea
+        value={prod.description}
+          required
           name="description"
           id=""
           cols="30"
@@ -69,7 +101,8 @@ export function AddProduct() {
         <br />
         <label htmlFor="">Category</label>
         {/* <input type="text" name="" id="" /> */}
-        <select name="category" onChange={handelChange} >
+        <select 
+        name="category" onChange={handelChange}>
           <option value="Elec">Elec</option>
           <option value="Phone">Phone</option>
           <option value="Clothes">Clothes</option>
@@ -82,3 +115,5 @@ export function AddProduct() {
     </div>
   );
 }
+
+export default Editprod;

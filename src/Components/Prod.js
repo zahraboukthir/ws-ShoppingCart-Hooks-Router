@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addtocart, proddetails } from "../JS/actions/panierActions";
+import { addtocart } from "../JS/actions/panierActions";
+import { delprod } from "../JS/actions/prodActions";
 import "./prod.css";
 
 export function Prod({
@@ -9,6 +10,23 @@ export function Prod({
   const dispatch = useDispatch();
   return (
     <div className="wrapper">
+      <Link to={
+        `/editproduct/${id}`
+      }>
+      <button
+              type="button"
+             
+            >
+              edit
+            </button></Link>
+            <button
+              type="button"
+            onClick={()=>
+           dispatch( delprod(id))
+          }
+            >
+             delet
+            </button>
       <div className="product-img">
         <img src={img} height={420} width={327} alt="" />
       </div>

@@ -1,4 +1,7 @@
 import {
+  ADDPROD,
+  DELPROD,
+  EDITPROD,
   FILTERBYCATEGORY,
   FILTERBYNAME,
   FILTERBYRATE,
@@ -36,7 +39,23 @@ export const prodReducer = (state = initState, { type, payload }) => {
         ...state,
         category: payload,
       };
-
+    case ADDPROD:
+      return {
+        ...state,
+        list: [payload, ...state.list],
+      };
+    case EDITPROD:
+      return {
+        ...state,
+        list: state.list.map((el) => (el.id == payload.id ? payload : el)),
+      };
+      case DELPROD:
+    return    {
+          ...state,
+          list:state.list.filter(
+            el=>el.id!=payload
+          )
+        }
     default:
       return state;
   }

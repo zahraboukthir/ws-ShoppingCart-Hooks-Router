@@ -6,6 +6,7 @@ import { Panier } from "./Components/Panier";
 import { Link, Route, Routes } from "react-router-dom";
 import ProductDetails from "./Components/ProductDetails";
 import { AddProduct } from "./Components/AddProduct";
+import Editprod from "./Components/Editprod";
 
 function App() {
   
@@ -18,6 +19,9 @@ function App() {
       <Routes>
         <Route path='/addproduct'  element={
           <AddProduct/>
+        }/>
+          <Route path='/editproduct/:id'  element={
+          <Editprod/>
         }/>
         <Route
           path="/"
